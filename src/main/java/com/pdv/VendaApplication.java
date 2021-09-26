@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.pdv.model.Categoria;
 import com.pdv.model.Cliente;
@@ -28,6 +29,9 @@ public class VendaApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(VendaApplication.class, args);
+		System.out.println(new BCryptPasswordEncoder().encode("123"));	
+		System.out.println("ola");	
+
 	}
 
 	@Override

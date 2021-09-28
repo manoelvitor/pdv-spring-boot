@@ -28,7 +28,7 @@ public class CategoriaController {
 	// localhost:8080/categorias?size=5 para paginar de 5 em 5 elementos
 	// ?size=5&page=1 o ultima parametro é o numero da pagina,
 	// paginação se inicia no 0
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<Page<Categoria>> getall(Pageable page) {
 		return ResponseEntity.ok(service.getAll(page));
 	}

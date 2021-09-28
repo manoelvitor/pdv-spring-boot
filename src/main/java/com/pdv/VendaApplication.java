@@ -11,9 +11,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.pdv.model.Categoria;
 import com.pdv.model.Cliente;
 import com.pdv.model.Produto;
+import com.pdv.model.Usuario;
 import com.pdv.repository.CategoriaRepository;
 import com.pdv.repository.ClienteRepository;
 import com.pdv.repository.ProdutoRepository;
+import com.pdv.service.UsuarioService;
 
 @SpringBootApplication
 public class VendaApplication implements CommandLineRunner {
@@ -26,11 +28,12 @@ public class VendaApplication implements CommandLineRunner {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(VendaApplication.class, args);
-		System.out.println(new BCryptPasswordEncoder().encode("123"));	
-		System.out.println("ola");	
 
 	}
 
@@ -53,6 +56,7 @@ public class VendaApplication implements CommandLineRunner {
 		
 		Produto p1 = new Produto("Notebook Dell", 3000.00);
 		p1.setCategorias(Arrays.asList(c1, c2));
+		
 
 		
 		Produto p2 = new Produto("Cafeteira Philco", 400.00);
@@ -73,14 +77,14 @@ public class VendaApplication implements CommandLineRunner {
 
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6));
 		
-
-
-
 		Cliente cli1 = new Cliente();
 		cli1.setCompra(Arrays.asList(p1,p1));
 
 			
 		clienteRepository.saveAll(Arrays.asList(cli1));
+		
+		Usuario u1 = new Usuario("manoel","Manoel Vitor","123");
+		usuarioService.save(u1);
 	}
 
 }

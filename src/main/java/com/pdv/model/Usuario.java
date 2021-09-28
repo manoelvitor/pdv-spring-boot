@@ -13,6 +13,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class Usuario implements UserDetails{
 
 
+	public Usuario(String login, String nomeCompleto, String senha) {
+		this.login = login;
+		this.nomeCompleto = nomeCompleto;
+		this.senha = senha;
+	}
+	
+	
+
+	public Usuario() {
+	}
+
+
+
 	private static final long serialVersionUID = 1L;
 
 	@Id

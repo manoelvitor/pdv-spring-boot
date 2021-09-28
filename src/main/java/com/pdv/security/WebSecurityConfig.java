@@ -19,29 +19,24 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-	
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	private ImplementsUserDetailsService userDetailsService;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-		.antMatchers(HttpMethod.GET,"/usuarios").permitAll()
-		.antMatchers(HttpMethod.POST,"/usuarios").permitAll()
-		.anyRequest().authenticated()
-		.and().formLogin().permitAll()
-		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.GET, "/usuarios").permitAll()
+				.antMatchers(HttpMethod.POST, "/usuarios").permitAll().anyRequest().authenticated().and().formLogin()
+				.permitAll().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService)
-		.passwordEncoder(new BCryptPasswordEncoder())
-		;
-		
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+
 	}
-	
+
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
